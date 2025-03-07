@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto p-6">
+<div class="container mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">History Check Karakter</h2>
     <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md">
         <!-- Tambahkan wrapper untuk tabel -->
