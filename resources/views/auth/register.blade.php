@@ -99,7 +99,7 @@
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'https://assets7.lottiefiles.com/packages/lf20_j1adxtyb.json' // Ganti dengan animasi lain jika diperlukan
+                path: 'https://assets7.lottiefiles.com/packages/lf20_j1adxtyb.json' 
             });
 
             setTimeout(() => {
