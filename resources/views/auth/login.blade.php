@@ -5,33 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Character Check</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
     <style>
-        .loading-spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid #ffffff;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #lottie-container {
+            width: 150px;
+            height: 150px;
         }
     </style>
 </head>
@@ -39,17 +38,15 @@
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
         <h2 class="text-3xl font-bold text-indigo-600 mb-6">Login</h2>
 
-        <!-- Menampilkan Flash Message Error -->
         @if(session('status'))
             <div class="mb-4 text-red-600 bg-red-100 p-3 rounded-lg">
                 {{ session('status') }}
             </div>
         @endif
 
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('login') }}" method="POST" id="loginForm">
             @csrf
 
-            <!-- Email Input -->
             <div class="mb-4 text-left">
                 <label for="email" class="block text-gray-700 font-semibold">Email</label>
                 <input id="email" type="email" name="email" required autofocus
@@ -59,7 +56,6 @@
                 @enderror
             </div>
 
-            <!-- Password Input -->
             <div class="mb-4 text-left">
                 <label for="password" class="block text-gray-700 font-semibold">Password</label>
                 <input id="password" type="password" name="password" required
@@ -69,7 +65,6 @@
                 @enderror
             </div>
 
-            <!-- Remember Me & Forgot Password -->
             <div class="flex justify-between items-center mb-4 text-sm text-gray-600">
                 <label class="flex items-center">
                     <input type="checkbox" name="remember" class="mr-2">
@@ -78,12 +73,10 @@
                 <a href="{{ route('password.request') }}" class="text-indigo-500 hover:underline">Forgot Password?</a>
             </div>
 
-            <!-- Submit Button -->
             <button type="submit" class="w-full bg-indigo-500 text-white py-3 rounded-lg font-semibold hover:bg-indigo-600 transition">
                 Login
             </button>
 
-            <!-- Register Link -->
             <p class="text-gray-600 text-sm mt-4">
                 Don't have an account? 
                 <a href="{{ route('register') }}" class="text-indigo-500 font-semibold hover:underline">Sign Up</a>
@@ -91,15 +84,27 @@
         </form>
     </div>
 
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
-        <div class="loading-spinner"></div>
+    <div id="loadingOverlay" class="loading-overlay">
+        <div id="lottie-container"></div>
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function(event) {
-            // Tampilkan loading overlay
-            document.getElementById('loadingOverlay').style.display = 'flex';
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            // Load Lottie Animation
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-container'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://assets7.lottiefiles.com/packages/lf20_j1adxtyb.json' // Ganti dengan animasi yang diinginkan
+            });
+
+            setTimeout(() => {
+                event.target.submit();
+            }, 1000); // Simulasi delay sebelum form dikirim
         });
     </script>
 </body>
