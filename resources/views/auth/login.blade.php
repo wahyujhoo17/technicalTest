@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Character Check</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #ffffff;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-r from-purple-500 to-indigo-600 h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
@@ -61,5 +90,17 @@
             </p>
         </form>
     </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            // Tampilkan loading overlay
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        });
+    </script>
 </body>
 </html>
