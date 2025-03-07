@@ -115,7 +115,7 @@
     <!-- Main Content -->
     <div class="flex-1 p-6 transition-colors duration-300">
         <!-- Tombol Toggle Sidebar untuk Mobile -->
-        <button id="toggle-sidebar" class="lg:hidden p-2 rounded-lg mb-4">
+        <button id="toggle-sidebar" class="lg:hidden p-2 rounded-lg mb-4 dark:text-light">
             <i class="fas fa-bars"></i>
         </button>
 
@@ -146,11 +146,11 @@
 
         // Dark mode toggle dengan animasi
         const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const body = document.body;
+        const htmlElement = document.documentElement; // Target elemen html
 
         darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark');
-            const isDarkMode = body.classList.contains('dark');
+            htmlElement.classList.toggle('dark');
+            const isDarkMode = htmlElement.classList.contains('dark');
             localStorage.setItem('dark-mode', isDarkMode);
 
             // Ganti ikon tombol dark mode
@@ -164,7 +164,7 @@
 
         // Set dark mode dari localStorage
         if (localStorage.getItem('dark-mode') === 'true') {
-            body.classList.add('dark');
+            htmlElement.classList.add('dark');
             const icon = darkModeToggle.querySelector('i');
             icon.classList.replace('fa-moon', 'fa-sun');
         }

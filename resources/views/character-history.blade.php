@@ -53,6 +53,16 @@
 <!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<style>
+    .dataTables_length {
+        display: none !important;
+    }
+    .dataTables_info {
+        display: none !important;
+    }
+</style>
+
+
 <script>
     $(document).ready(function() {
         $('#history-table').DataTable({

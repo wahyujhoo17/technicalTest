@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto p-6">
     <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-light">Check Karakter</h2>
-    <form id="character-check-form" class="bg-white dark:bg-dark p-6 rounded-lg shadow-md">
+    <form id="character-check-form" class="bg-white dark:dark:bg-gray-800 p-6 rounded-lg shadow-md">
         @csrf
         <div class="mb-4">
             <label for="input1" class="block text-sm font-medium text-gray-700 dark:text-light">Input 1</label>
